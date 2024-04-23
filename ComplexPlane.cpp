@@ -47,3 +47,15 @@ void ComplexPlane::loadText(Text& text){
     text.setPosition(10,10);
 }
 
+void ComplexPlane::loadText(Text& text){
+    std::stringstream ss;
+    ss<< "Mandelbrot Set\n";
+    ss<< "Center: " << m_plane_center.x << ", " << m_plane_center.y << "\n";
+    ss<< "Size: " << m_plane_size.x << ", " << m_plane_size.y<< "\n";
+    ss<< "Left-click to zoom in\n";
+    ss<< "Right-click to zoom out\n";
+    text.setString(ss.str());
+    text.setCharacterSize(20);
+    text.setFillColor(Color::White);
+    text.setPosition(10,10);
+}
