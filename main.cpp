@@ -15,8 +15,8 @@ int main() {
   ComplexPlane complexPlane(pixelWidth, pixelHeight);
 
   Font font;
-  font.loadFromFile("KOMIKAP.ttf")
-  if (!font.loadFromFile("KOMIKAP.ttf")) {
+  font.loadFromFile("KOMIKAP_.ttf")
+  if (!font.loadFromFile("KOMIKAP_.ttf")) {
     cerr << "Something wrong with font" << endl;
     return 1;
   }
@@ -45,7 +45,7 @@ int main() {
 
           complexPlane.zoomIn();
           complexPlane.setCenter(
-          Vector2i(event.mouseButton.x, event.mouseButton.y));
+          Vector2i(event.mouseButton.x, event.mouseButton.y);
         }
        
         else if (event.mouseButton.button == sf::Mouse::Right) 
@@ -56,7 +56,7 @@ int main() {
 
         complexPlane.zoomOut();
         complexPlane.setCenter(
-        Vector2i(event.mouseButton.x, event.mouseButton.y));
+        Vector2i(event.mouseButton.x, event.mouseButton.y);
         }
       }
       else if (event.type == sf::Event::MouseMoved) 
