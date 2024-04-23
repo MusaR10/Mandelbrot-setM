@@ -3,8 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
+#include <cmath>
+#include <vectror>
 
 using namespace sf;
+using namespace std;
 
 const unsigned int MAX_ITER = 64;
 const float BASE_WIDTH = 4.0;
@@ -28,9 +32,6 @@ public:
     void setCenter(Vector2i mousePixel);
     void setMouseLocation(Vector2i mousPixel);
     void loadText(Text &text);
-    void loadText(Text& text);
-    void updateRender();
-
 
 private:
     float m_aspectRatio;
