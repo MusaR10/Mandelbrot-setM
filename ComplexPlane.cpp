@@ -48,6 +48,7 @@ void ComplexPlane::loadText(Text& text){
     text.setPosition(10,10);
 }
 
+<<<<<<< HEAD
 int ComplexPlane::countIterations(Vector2f coord){
     size_t iterations = 0;
     complex<double> x (0,0);
@@ -92,4 +93,17 @@ Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel){
   float x = ((mousePixel.x-0)/ static_cast<float>(m_pixelWidth))* m_plane_size.x + (m_plane_center.x-m_plane_size.x/ 2.0);
   float y = ((mousePixel.y-m_pixelHeight)/ static_cast<float>(0-m_pixelHeight))* m_plane_size.y + (m_plane_center.y-m_plane_size.y/ 2.0);
   return {x,y};
+=======
+void ComplexPlane::loadText(Text& text){
+    std::stringstream ss;
+    ss<< "Mandelbrot Set\n";
+    ss<< "Center: " << m_plane_center.x << ", " << m_plane_center.y << "\n";
+    ss<< "Size: " << m_plane_size.x << ", " << m_plane_size.y<< "\n";
+    ss<< "Left-click to zoom in\n";
+    ss<< "Right-click to zoom out\n";
+    text.setString(ss.str());
+    text.setCharacterSize(20);
+    text.setFillColor(Color::White);
+    text.setPosition(10,10);
+>>>>>>> 27b7e92dbc28a81874e64275d60d13266f6efc8a
 }
