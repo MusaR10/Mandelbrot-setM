@@ -5,7 +5,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include <cmath>
-#include <vectror>
+#include <vector>
 
 using namespace sf;
 using namespace std;
