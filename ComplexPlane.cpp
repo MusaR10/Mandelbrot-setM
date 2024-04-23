@@ -9,7 +9,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight){
     m_ZoomCount = 0;
     m_state = State::CALCULATING;
     m_vArray = VertexArray(Points, pixelWidth*pixelHeight);
-    court<<m_plane_size.x << " " << m_plane_size.y << endl;
+    cout<<m_plane_size.x << " " << m_plane_size.y << endl;
 }
 
 void ComplexPlane::draw(RenderTarget& target, RenderStates states) const{

@@ -5,7 +5,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include <cmath>
-#include <vectror>
+#include <vector>
 
 using namespace sf;
 using namespace std;
@@ -26,11 +26,11 @@ class ComplexPlane : public Drawable
 public:
     ComplexPlane(int pixelWidth, int pixelHeight);
     void draw(RenderTarget &target, RenderStates states) const;
-    void updateRender();
+   // void updateRender();
     void zoomIn();
     void zoomOut();
-    void setCenter(Vector2i mousePixel);
-    void setMouseLocation(Vector2i mousPixel);
+   /* void setCenter(Vector2i mousePixel);
+    void setMouseLocation(Vector2i mousPixel);*/
     void loadText(Text &text);
 
 private:
