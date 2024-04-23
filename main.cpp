@@ -50,7 +50,7 @@ int main() {
        
         else if (event.mouseButton.button == sf::Mouse::Right) 
         {
-        cout << "the right button was pressed" << endl;
+        cout << "Right click = Zooming out." << endl;
         cout << "mouse x: " << event.mouseButton.x << endl;
         cout << "mouse y: " << event.mouseButton.y << endl;
 
