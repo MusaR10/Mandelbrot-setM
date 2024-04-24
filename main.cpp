@@ -15,11 +15,8 @@ int main() {
   ComplexPlane complexPlane(pixelWidth, pixelHeight);
 
   Font font;
-<<<<<<< HEAD
   font.loadFromFile("KOMIKAP_.ttf");
-=======
-  font.loadFromFile("KOMIKAP_.ttf")
->>>>>>> 27b7e92dbc28a81874e64275d60d13266f6efc8a
+  font.loadFromFile("KOMIKAP_.ttf");
   if (!font.loadFromFile("KOMIKAP_.ttf")) {
     cerr << "Something wrong with font" << endl;
     return 1;
@@ -48,12 +45,7 @@ int main() {
           cout << "Mouse y: " << event.mouseButton.y << endl;
 
           complexPlane.zoomIn();
-<<<<<<< HEAD
-//          complexPlane.setCenter(
-=======
-          complexPlane.setCenter(
->>>>>>> 27b7e92dbc28a81874e64275d60d13266f6efc8a
-          Vector2i(event.mouseButton.x, event.mouseButton.y);
+//          complexPlane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y);
         }
        
         else if (event.mouseButton.button == sf::Mouse::Right) 
@@ -63,12 +55,7 @@ int main() {
         cout << "mouse y: " << event.mouseButton.y << endl;
 
         complexPlane.zoomOut();
-<<<<<<< HEAD
-  //      complexPlane.setCenter(
-=======
-        complexPlane.setCenter(
->>>>>>> 27b7e92dbc28a81874e64275d60d13266f6efc8a
-        Vector2i(event.mouseButton.x, event.mouseButton.y);
+//        complexPlane.setCenter( Vector2i(event.mouseButton.x, event.mouseButton.y);
         }
       }
       else if (event.type == sf::Event::MouseMoved) 
