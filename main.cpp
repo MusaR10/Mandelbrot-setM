@@ -28,7 +28,9 @@ int main() {
   text.setCharacterSize(20);
   text.setFillColor(Color::White);
   text.setStyle(Text::Bold);
-
+  
+  Vector2i mousePixel;
+  
   while (window.isOpen()) 
   {
     Event event;
@@ -41,26 +43,32 @@ int main() {
         if (event.mouseButton.button == sf::Mouse::Left) 
         {
           cout << "Left click = Zooming in." << endl;
+          mousePixel.x = event.mouseButton.x;
+          mousePixel.y = event.mouseButton.y;
+          
           cout << "Mouse x: " << event.mouseButton.x << endl;
           cout << "Mouse y: " << event.mouseButton.y << endl;
 
           complexPlane.zoomIn();
-//          complexPlane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y);
+          complexPlane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y));
         }
        
         else if (event.mouseButton.button == sf::Mouse::Right) 
         {
         cout << "Right click = Zooming out." << endl;
-        cout << "mouse x: " << event.mouseButton.x << endl;
-        cout << "mouse y: " << event.mouseButton.y << endl;
+        mousePixel.x = event.mouseButton.x;
+        mousePixel.y = event.mouseButton.y;
+          
+        cout << "Mouse x: " << event.mouseButton.x << endl;
+        cout << "Mouse y: " << event.mouseButton.y << endl;
 
         complexPlane.zoomOut();
-//        complexPlane.setCenter( Vector2i(event.mouseButton.x, event.mouseButton.y);
+        complexPlane.setCenter( Vector2i(event.mouseButton.x, event.mouseButton.y));
         }
       }
       else if (event.type == sf::Event::MouseMoved) 
       {
-    //    complexPlane.setMouseLocation(Vector2i(event.mouseMove.x, event.mouseMove.y));
+        complexPlane.setMouseLocation(Vector2i(event.mouseMove.x, event.mouseMove.y));
       }
         
     }
@@ -70,7 +78,7 @@ int main() {
       window.close();
     }
 
-   // complexPlane.updateRender();
+    complexPlane.updateRender();
     complexPlane.loadText(text);
       
     window.clear();
