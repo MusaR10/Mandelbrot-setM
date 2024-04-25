@@ -30,7 +30,7 @@ public:
     void zoomIn();
     void zoomOut();
    /* void setCenter(Vector2i mousePixel);
-    void setMouseLocation(Vector2i mousPixel);*/
+    void setMouseLocation(Vector2i mousePixel);*/
     void loadText(Text &text);
 
 private:
