@@ -9,7 +9,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight){
 	m_plane_size = {BASE_WIDTH, BASE_HEIGHT * m_aspectRatio};
 	m_ZoomCount = 0;
 	m_state = State::CALCULATING;
-	m_vArray = setPrimitiveType(Points);
+	m_vArray.setPrimitiveType(Points);
 	m_vArray.resize(pixelWidth*pixelHeight);
 }
 
@@ -48,6 +48,19 @@ void ComplexPlane::zoomOut(){
   m_state = State::CALCULATING;
 }
 
+void ComplexPlane::setCenter(vector2i mousePixel){
+	Vector2f position = mapPixelToCoords(mousePixel);
+	m_place_center = positon;
+	m_state = State::CALCULATING;
+
+}
+
+void ComplexPlane::setMouseLocation(Vector2i mousePixel){
+	Vector2f positon = mapPixelToCoords(mousePixel);
+	m_mouseLocation.x = positon.x;
+	m_mouseLocation.y = position.y;
+}
+
 void ComplexPlane::loadText(Text& text){
     stringstream ss;
     ss<< "Mandelbrot set\n";
@@ -80,7 +93,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
     	}
 	else {
 		size_t region = count/(MAX_ITER/5);
-		switch region{
+		switch (region){
 			case 0:
 			  r=255;
 			  g=0;
@@ -107,7 +120,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 			  b=255;
 			  break;
 		}
-	]
+	}
 }
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel){
