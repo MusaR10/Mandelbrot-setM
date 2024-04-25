@@ -8,7 +8,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight){
 	m_plane_center = {0, 0};
 	m_plane_size = {BASE_WIDTH, BASE_HEIGHT * m_aspectRatio};
 	m_ZoomCount = 0;
-	m_state = State::CALCULATING
+	m_state = State::CALCULATING;
 	m_vArray = setPrimitiveType(Points);
 	m_vArray.resize(pixelWidth*pixelHeight);
 }
@@ -17,20 +17,21 @@ void ComplexPlane::draw(RenderTarget& target, RenderStates states) const{
     target.draw(m_vArray);
 }
 
-/*update render
 void ComplexPlane::updateRender(){
-if m_state == State::CALCULATING{
-	for int i/i<y
- 		for int j/ j<x
-   		m_vArray[...]
-     		Vector2f position = mapPTC(j,i);
-       		int iteration = countiterations(position);
-	 	iterate to r,g,b
-   		add color to vArray
-        state::Displaying
+    if(m_state == State::CALCULATING){
+        for(int i = 0; i < m_pixel_size.y; i++){
+            for(int j = 0; j < m_pixel_size.x; j++){
+                m_vArray[j+i* m_pixel_size.x].position = {(float)j, (float)i};
+                Vector2f position = mapPixelToCoords(Vector2i(j,i));
+                int iterations = countIterations(position);
+                Uint8 r, g, b;
+                iterationsToRGB(iterations, r, g, b);
+                m_vArray[j + i * m_pixel_size.x].color = {r, g, b};
+            }
+        }
+        m_state = State::DISPLAYING;
+    }
 }
-}
-*/
 void ComplexPlane::zoomIn(){
     m_ZoomCount++;
     float x_size = BASE_WIDTH * (pow(BASE_ZOOM, m_ZoomCount));
@@ -61,7 +62,7 @@ void ComplexPlane::loadText(Text& text){
 }
 
 int ComplexPlane::countIterations(Vector2f coord){
-    size_t iterations = 0;
+    int iterations = 0;
     complex<double> x (0,0);
     complex<double> c (coord.x, coord.y);
     while(iterations < MAX_ITER && abs(x)<2){
@@ -70,37 +71,51 @@ int ComplexPlane::countIterations(Vector2f coord){
     }
     return iterations;
 }
+
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b){
 	if(count == MAX_ITER){
         	r = 0;
         	g = 0;
         	b = 0;
     	}
-	else if (count<10){
-		r=192;
-		g=0;
-		b=255;
-	}
-	else if (count<20){
-		r=0;
-		g=255;
-		b=0;
-	}
-	else if (count<30){
-		r=0;
-		g=175;
-		b=12;
-	}
-	else if (count<40){
-		r=0;
-		g=0;
-		b=255;
-	}
-
+	else {
+		size_t region = count/(MAX_ITER/5);
+		switch region{
+			case 0:
+			  r=255;
+			  g=0;
+			  b=0;
+			  break;
+			case 1:
+			  r=255;
+			  g=180;
+			  b=0;
+			  break;
+			case 2:
+			  r=0;
+			  g=255;
+			  b=75;
+			  break;
+			case 3:
+			  r=0;
+			  g=150;
+			  b=255;
+			  break;
+			case 4:
+			  r=130;
+			  g=0;
+			  b=255;
+			  break;
+		}
+	]
 }
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel){
-  float x = ((mousePixel.x-0)/ static_cast<float>(m_pixelWidth))* m_plane_size.x + (m_plane_center.x-m_plane_size.x/ 2.0);
-  float y = ((mousePixel.y-m_pixelHeight)/ static_cast<float>(0-m_pixelHeight))* m_plane_size.y + (m_plane_center.y-m_plane_size.y/ 2.0);
-  return {x,y};
+	float Xmin = m_plane_center.x - m_plane_size.x / 2.0f;
+	float Xmax = m_plane_center.x + m_plane_size.x / 2.0f;
+	float Ymin = m_plane_center.y - m_plane_size.y / 2.0f;
+	float Ymax = m_plane_center.y + m_plane_size.y / 2.0f;
+	float x = ((float)mousePixel.x / m_pixel_size.x) * (Xmax - Xmin) + Xmin;
+	float y = ((float)mousePixel.y - m_pixel_size.y)/ m_pixel_size.y) * (Ymax - Ymin) + Ymin;
+	return Vector2f(x,y);
 }
